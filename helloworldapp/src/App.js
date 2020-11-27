@@ -6,8 +6,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      title: "Hello from Bridgelabz",
-    };
+      userName : ''
+    }
   }
 
   // ClickHandlerFunction
@@ -16,14 +16,28 @@ class App extends React.Component {
     window.open(this.url,'_blank');
   }
 
+  // NameChangeHandler
+  nameChangeHandler =(event) =>{
+    console.log("value is ", event.target.value);
+    // see the title using setState Method
+    this.setState(
+      {userName : event.target.value}
+    )
+  }
+
   render() {
     return (
       <div>
-        <h1>{this.state.title}</h1>
+        <div>
+        <h1>Hello {this.state.userName} from BridgeLabz</h1>
         <img
           src={logo} onClick={this.clickHandler}
           alt="The BridgeLabz logo: A Bridge to Employement through lab works"
         />
+        </div>
+        <div className='text-box'>
+          <input onChange={this.nameChangeHandler}/>
+        </div>
       </div>
     );
   }
