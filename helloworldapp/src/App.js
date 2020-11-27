@@ -6,7 +6,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      userName : ''
+      userName : '',
+      nameError: ''
     }
   }
 
@@ -18,11 +19,15 @@ class App extends React.Component {
 
   // NameChangeHandler
   nameChangeHandler =(event) =>{
-    console.log("value is ", event.target.value);
+    console.log("Value is ", event.target.value);
+    const NAME_REGEX=RegExp('^[A-Z]{1}[a-z\\s]{2,}$');
     // see the title using setState Method
-    this.setState(
-      {userName : event.target.value}
-    )
+    this.setState({userName: event.target.value});    
+    if(NAME_REGEX.test(event.target.value)) {
+        this.setState({nameError: ''})
+    } else {
+        this.setState({nameError: 'Name is Incorrect'})
+    }  
   }
 
   render() {
@@ -37,6 +42,7 @@ class App extends React.Component {
         </div>
         <div className='text-box'>
           <input onChange={this.nameChangeHandler}/>
+          <span className="error-output">{this.state.nameError}</span>
         </div>
       </div>
     );
